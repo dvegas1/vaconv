@@ -36,21 +36,46 @@ import java.util.Map;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.util.Arrays;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.ApplicationContext;
+import java.util.Arrays;
 
-@Controller
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
+
 @SpringBootApplication
 public class Main {
 
-  @Value("${spring.datasource.url}")
-  private String dbUrl;
+    public static void main(String[] args) {
+        SpringApplication.run(Main.class, args);
+    }
 
-  @Autowired
-  private DataSource dataSource;
+    @Bean
+    public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
+  
+        
+            System.out.println("Let's inspect the beans provided by Spring Boot:");
+            String aa="hola";
+            String[] beanNames = ctx.getBeanDefinitionNames();
+            Arrays.sort(beanNames);
+            for (String beanName : beanNames) {
+                System.out.println(beanName);
+            }
+        return (CommandLineRunner) SpringApplication.run(Main.class);
 
-  public static void main(String[] args) throws Exception {
+    
+}
+    
+}
+
+ /* public static void main(String[] args) throws Exception {
     SpringApplication.run(Main.class, args);
     	
     String  respuesta = JOptionPane.showInputDialog("Escribe tu nombre");
@@ -76,4 +101,4 @@ public class Main {
     }
   }
 
-}
+}*/
