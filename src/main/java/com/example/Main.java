@@ -48,35 +48,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class Main {
 
-    public static void main(String[] args) {
-        SpringApplication.run(Main.class, args);
-    }
-
-    @Bean
-    public ConfigurableApplicationContext commandLineRunner(ApplicationContext ctx) {
-  
-        
-            System.out.println("Let's inspect the beans provided by Spring Boot:");
-            String aa="hola";
-            String[] beanNames = ctx.getBeanDefinitionNames();
-            Arrays.sort(beanNames);
-            for (String beanName : beanNames) {
-                System.out.println(beanName);
-            }
-        return SpringApplication.run(Main.class);
-
-    
-    
-}
-}
-
- /* public static void main(String[] args) throws Exception {
+ public static void main(String[] args) throws Exception {
     SpringApplication.run(Main.class, args);
     	
     String  respuesta = JOptionPane.showInputDialog("Escribe tu nombre");
@@ -91,15 +68,4 @@ public class Main {
 
   
 
-  @Bean
-  public DataSource dataSource() throws SQLException {
-    if (dbUrl == null || dbUrl.isEmpty()) {
-      return new HikariDataSource();
-    } else {
-      HikariConfig config = new HikariConfig();
-      config.setJdbcUrl(dbUrl);
-      return new HikariDataSource(config);
-    }
-  }
-
-}*/
+}
