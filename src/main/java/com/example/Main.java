@@ -48,6 +48,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
@@ -58,7 +59,7 @@ public class Main {
     }
 
     @Bean
-    public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
+    public ConfigurableApplicationContext commandLineRunner(ApplicationContext ctx) {
   
         
             System.out.println("Let's inspect the beans provided by Spring Boot:");
@@ -68,11 +69,11 @@ public class Main {
             for (String beanName : beanNames) {
                 System.out.println(beanName);
             }
-        return (CommandLineRunner) SpringApplication.run(Main.class);
+        return SpringApplication.run(Main.class);
 
     
-}
     
+}
 }
 
  /* public static void main(String[] args) throws Exception {
