@@ -33,6 +33,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Map;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 @Controller
 @SpringBootApplication
@@ -46,6 +52,10 @@ public class Main {
 
   public static void main(String[] args) throws Exception {
     SpringApplication.run(Main.class, args);
+    	
+    String  respuesta = JOptionPane.showInputDialog("Escribe tu nombre");
+    
+    
   }
 
   @RequestMapping("/")
@@ -53,26 +63,7 @@ public class Main {
     return "index";
   }
 
-  @RequestMapping("/db")
-  String db(Map<String, Object> model) {
-    try (Connection connection = dataSource.getConnection()) {
-      Statement stmt = connection.createStatement();
-      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS ticks (tick timestamp)");
-      stmt.executeUpdate("INSERT INTO ticks VALUES (now())");
-      ResultSet rs = stmt.executeQuery("SELECT tick FROM ticks");
-
-      ArrayList<String> output = new ArrayList<String>();
-      while (rs.next()) {
-        output.add("Read from DB: " + rs.getTimestamp("tick"));
-      }
-
-      model.put("records", output);
-      return "db";
-    } catch (Exception e) {
-      model.put("message", e.getMessage());
-      return "error";
-    }
-  }
+  
 
   @Bean
   public DataSource dataSource() throws SQLException {
