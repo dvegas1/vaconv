@@ -3,7 +3,7 @@
 *
 * Released under the MIT license
 */
-package com.giaybac.traprange.entity;
+package com.example;
 
 import java.util.ArrayList;
 import java.util.List;

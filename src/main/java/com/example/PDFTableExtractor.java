@@ -3,11 +3,11 @@
  *
  * Released under the MIT license
  */
-package com.giaybac.traprange;
+package com.example;
 
-import com.giaybac.traprange.entity.Table;
-import com.giaybac.traprange.entity.TableCell;
-import com.giaybac.traprange.entity.TableRow;
+import com.example.Table;
+import com.example.TableCell;
+import com.example.TableRow;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.Multimap;
