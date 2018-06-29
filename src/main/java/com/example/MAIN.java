@@ -1,8 +1,8 @@
 /**
-* Copyright (C) 2016, GIAYBAC
-*
+ * Copyright (C) 2016, GIAYBAC
+ * 
 * Released under the MIT license
-*/
+ */
 package com.example;
 
 import com.example.Table;
@@ -14,17 +14,51 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
+import javax.sql.DataSource;
 import org.apache.log4j.PropertyConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.apache.log4j.PropertyConfigurator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.stereotype.Controller;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Map;
+import org.apache.log4j.xml.DOMConfigurator;
 
 /**
  *
  * @author thoqbk
  */
+@Controller
+@SpringBootApplication
+
 public class MAIN {
+
+    @Value("${spring.datasource.url}")
+    private String dbUrl;
+
+    @Autowired
+    private DataSource dataSource;
 
     private static final Logger logger = LoggerFactory.getLogger(MAIN.class);
 
@@ -35,16 +69,34 @@ public class MAIN {
      * -p: page  <br/>
      * -ep: except page <br/>
      * -h: help
+     *
+     *
+     */
+    public static void main(String[] args) throws Exception {
 
-**/
-    
-    public static void main(String[] args) {
-        PropertyConfigurator.configure(MAIN.class.getResource("/com/giaybac/traprange/log4j.properties"));
+        SpringApplication.run(MAIN.class, args);
+
+        DOMConfigurator.configure("log4j.xml");
+
+       // String[] args1 ={"dssd","dsdfs"};
+        //String[] args1={"-in","idx.pdf","-out","idx.html","-el","0,1,-1"};
+        //Log4jInitListener
+        
+        //by logging.config="file:/data/log/report-log4j.properties";
+                
+        //PropertyConfigurator.configure(MAIN.class.getResource("/com/giaybac/traprange/log4j.properties"));
+
         if (args.length == 1 && "-h".equals(args[0])) {
-            printHelp();
+            SpringApplication.run(MAIN.class, args);
         } else {
-            extractTables(args);
+            SpringApplication.run(MAIN.class, args);
+            // extractTables(args);
         }
+    }
+
+    @RequestMapping("/")
+    String index() {
+        return "index";
     }
 
     private static void extractTables(String[] args) {
@@ -145,7 +197,7 @@ public class MAIN {
     private static List<Integer[]> getExceptLines(String[] args) {
         List<Integer[]> retVal = new ArrayList<>();
         String exceptLinesInString = getArg(args, "el");
-        if(exceptLinesInString == null){
+        if (exceptLinesInString == null) {
             return retVal;
         }
         //ELSE:

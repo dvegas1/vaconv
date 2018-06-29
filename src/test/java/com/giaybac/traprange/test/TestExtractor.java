@@ -36,11 +36,8 @@ public class TestExtractor {
         PropertyConfigurator.configure(TestExtractor.class.getResource("/com/giaybac/traprange/log4j.properties"));
 
         String homeDirectory = System.getProperty("user.dir");
-        
 
         String sourceDirectory = Paths.get(homeDirectory, "_Docs").toString();
-        
-        System.out.println("sourceDirectory " +sourceDirectory);
         String resultDirectory = Paths.get(homeDirectory, "_Docs", "result").toString();
         
         for (int idx = 0; idx < 5; idx++) {
