@@ -50,7 +50,7 @@ public class MAIN {
     @Autowired
     private DataSource dataSource;
 
-//    private static final Logger logger = LoggerFactory.getLogger(MAIN.class);
+    private static final Logger logger = LoggerFactory.getLogger(MAIN.class);
 
     /**
      * -in: source <br/>
@@ -80,7 +80,7 @@ public class MAIN {
             SpringApplication.run(MAIN.class, args);
         } else {
             SpringApplication.run(MAIN.class, args);
-            // extractTables(args);
+            extractTables(args);
         }
     }
 
@@ -145,7 +145,7 @@ public class MAIN {
                 }
             }
         } catch (Exception e) {
-            //logger.error(null, e);
+            logger.error(null, e);
         }
     }
 
@@ -159,7 +159,7 @@ public class MAIN {
                 .append("\t-ep: all pages except these pages. Ex: 1,2\n")
                 .append("\t-h: help\n")
                 .append("---");
-        //logger.info(help.toString());
+        logger.info(help.toString());
     }
 
     private static List<Integer> getPages(String[] args) {
